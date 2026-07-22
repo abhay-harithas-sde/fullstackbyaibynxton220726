@@ -1,0 +1,3 @@
+import { supabase } from './supabase';
+const base = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+export async function api<T>(path: string, init: RequestInit = {}): Promise<T> { const token = (await supabase?.auth.getSession())?.data.session?.access_token; const r = await fetch(`${base}${path}`, { ...init, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}), ...init.headers } }); const body = await r.json().catch(() => ({})); if (!r.ok) throw new Error(body.message || 'Something went wrong. Please try again.'); return body as T; }

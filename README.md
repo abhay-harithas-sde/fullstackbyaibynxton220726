@@ -247,3 +247,7 @@ Keep `.env.production` out of source control.
 - The app is designed for beginner-friendly interview practice.
 - Keep secrets only in environment variables or secret managers.
 - The backend should remain the only place where the Gemini API key and Supabase service role key are used.
+
+## Copyright
+
+Copyright © 2026 Abhay. All rights reserved.

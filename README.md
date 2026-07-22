@@ -221,7 +221,7 @@ The server also:
 4. Set frontend variables:
    - `VITE_SUPABASE_URL`
    - `VITE_SUPABASE_ANON_KEY`
-   - `VITE_API_BASE_URL=https://your-api-domain.example/api`
+   - `VITE_API_BASE_URL=https://careerpilot-ai-ps1z.onrender.com/api`
 5. Deploy the frontend to a static host and the backend to a Node runtime.
 6. Update Supabase Auth Site URL and Redirect URLs to your production frontend domain.
 7. Put both services behind HTTPS.
@@ -248,8 +248,9 @@ This repository includes [render.yaml](render.yaml) so you can deploy the app as
    - `SUPABASE_ANON_KEY`
    - `SUPABASE_SERVICE_ROLE_KEY`
    - `GEMINI_API_KEY`
-5. After the backend deploys, confirm the frontend is using the deployed backend URL and that Supabase Auth redirect URLs include `https://careerpilot-web.onrender.com`.
-6. If you use a custom domain, update `CLIENT_URL` in the backend service and `VITE_API_BASE_URL` in the frontend service accordingly.
+5. Set the backend service environment variable `CLIENT_URL=https://careerpilot-web-r9us.onrender.com`.
+6. Update Supabase Auth Site URL and Redirect URLs to `https://careerpilot-web-r9us.onrender.com`.
+7. Set the frontend service environment variable `VITE_API_BASE_URL=https://careerpilot-ai-ps1z.onrender.com/api`.
 
 The Blueprint uses a static site for the frontend and a Node web service for the API. The frontend build is published from `frontend/dist`, and the API health check is exposed at `/health`.
 

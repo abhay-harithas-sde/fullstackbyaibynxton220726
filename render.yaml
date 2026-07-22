@@ -21,7 +21,7 @@ services:
       - key: GEMINI_API_KEY
         sync: false
       - key: CLIENT_URL
-        value: https://careerpilot-web.onrender.com
+        value: https://careerpilot-web-r9us.onrender.com
 
   - type: web
     name: careerpilot-web
@@ -42,4 +42,4 @@ services:
       - key: VITE_SUPABASE_ANON_KEY
         sync: false
       - key: VITE_API_BASE_URL
-        value: https://careerpilot-api.onrender.com/api
+        value: https://careerpilot-ai-ps1z.onrender.com/api

@@ -234,6 +234,25 @@ docker compose -f docker-compose.production.yml --env-file .env.production up --
 
 Keep `.env.production` out of source control.
 
+## Deploy On Render
+
+This repository includes [render.yaml](render.yaml) so you can deploy the app as a Render Blueprint.
+
+1. Push the repository to GitHub.
+2. In Render, create a new Blueprint from this repository and select [render.yaml](render.yaml).
+3. Render will create two services:
+   - `careerpilot-api` for the Express backend
+   - `careerpilot-web` for the React frontend
+4. Provide the secret values when Render prompts for them:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `GEMINI_API_KEY`
+5. After the backend deploys, confirm the frontend is using the deployed backend URL and that Supabase Auth redirect URLs include `https://careerpilot-web.onrender.com`.
+6. If you use a custom domain, update `CLIENT_URL` in the backend service and `VITE_API_BASE_URL` in the frontend service accordingly.
+
+The Blueprint uses a static site for the frontend and a Node web service for the API. The frontend build is published from `frontend/dist`, and the API health check is exposed at `/health`.
+
 ## Troubleshooting
 
 - If sign-in redirects fail, check the Supabase Auth Site URL and Redirect URLs.

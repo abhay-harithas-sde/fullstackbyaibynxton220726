@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: careerpilot-api
+    runtime: node
+    region: oregon
+    plan: starter
+    rootDir: .
+    buildCommand: npm ci && npm run build -w backend
+    startCommand: npm run start -w backend
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CLIENT_URL
+        value: https://careerpilot-web.onrender.com
+
+  - type: web
+    name: careerpilot-web
+    runtime: static
+    region: oregon
+    plan: starter
+    rootDir: .
+    buildCommand: npm ci && npm run build -w frontend
+    staticPublishPath: frontend/dist
+    autoDeployTrigger: commit
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+      - key: VITE_API_BASE_URL
+        value: https://careerpilot-api.onrender.com/api
